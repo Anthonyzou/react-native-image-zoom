@@ -22,7 +22,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.facebook.react:react-native:0.19.1'
+    compile 'com.facebook.react:react-native:0.20.+'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.squareup.picasso:picasso:+'
     compile 'com.facebook.fresco:fresco:0.9.+'

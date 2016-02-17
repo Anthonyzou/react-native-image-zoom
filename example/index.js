@@ -17,7 +17,7 @@ class example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: "http://placehold.it/300"}}></Image>
+        <Image style={styles.image} src={ "http://placehold.it/300"}></Image>
       </View>
     );
   }
