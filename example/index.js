@@ -12,7 +12,9 @@ import React, {
   Dimensions,
   // Image,
 } from 'react-native';
-import Image from './image.js'
+
+import Image from 'react-native-image-zoom'
+
 class example extends Component {
   render() {
     return (

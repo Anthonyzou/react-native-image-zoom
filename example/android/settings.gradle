@@ -2,4 +2,4 @@ rootProject.name = 'example'
 
 include ':app'
 include ':react-native-zoomable'
-project(':react-native-zoomable').projectDir = file('../../android/')
+project(':react-native-zoomable').projectDir = file('../node_modules/react-native-image-zoom/android')

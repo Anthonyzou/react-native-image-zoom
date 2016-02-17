@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "react-native-image-zoom": "git+ssh@github.com:Anthonyzou/react-image-zoom.git",
     "react-native": "^0.20.0"
   }
 }
