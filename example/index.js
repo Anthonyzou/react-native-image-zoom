@@ -15,8 +15,8 @@ import React, {
 } from 'react-native';
 
 import Image from 'react-native-image-zoom'
-
-class example extends Component {
+import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
+class Example extends Component {
   constructor(a,b){
     super(a,b)
     this.state = {
@@ -30,6 +30,16 @@ class example extends Component {
         <Image style={styles.image} src={this.state.text}></Image>
       </View>
     );
+  }
+}
+
+class main extends Component{
+  render(){
+    return (
+      <Router hideNavBar={true}>
+        <Route name="Main" type="reset" component={Example}/>
+      </Router>
+    )
   }
 }
 const {height, width} = Dimensions.get('window');
@@ -46,4 +56,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('example', () => example);
+AppRegistry.registerComponent('example', () => main);

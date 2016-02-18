@@ -1,9 +1,14 @@
 package com.imager;
 
+import android.graphics.Bitmap;
+import android.view.View;
+
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.squareup.picasso.Picasso;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import javax.annotation.Nullable;
 
@@ -13,32 +18,49 @@ import uk.co.senab.photoview.PhotoView;
  * Created by azou on 15/02/16.
  */
 public class ViewManager extends SimpleViewManager<PhotoView> {
-  PhotoView attacher;
-  @Override
-  public String getName() {
-    return "ImageViewZoom";
-  }
+    PhotoView attacher;
+    ImageLoader imageLoader;
+
+    public ViewManager(ImageLoader instance) {
+        this.imageLoader = instance;
+    }
+
+    @Override
+    public String getName() {
+        return "ImageViewZoom";
+    }
 
 
-  @Override
-  public PhotoView createViewInstance(ThemedReactContext reactContext) {
-    attacher = new PhotoView(reactContext);
-    return attacher;
-  }
+    @Override
+    public PhotoView createViewInstance(ThemedReactContext reactContext) {
+        attacher = new PhotoView(reactContext);
+        return attacher;
+    }
 
-  // In JS this is Image.props.source.uri
-  @ReactProp(name = "src")
-  public void setSource(PhotoView view, @Nullable String source) {
-    Picasso.with(view.getContext()).load(source)
-        .into(view, new com.squareup.picasso.Callback() {
-          @Override
-          public void onSuccess() {
-          }
+    // In JS this is Image.props.source.uri
+    @ReactProp(name = "src")
+    public void setSource(PhotoView view, @Nullable String source) {
+        imageLoader.displayImage(source, view, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
 
-          @Override
-          public void onError() {
-          }
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
         });
-  }
+    }
 
 }
