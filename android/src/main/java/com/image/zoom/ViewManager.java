@@ -1,4 +1,4 @@
-package com.imager;
+package com.image.zoom;
 
 import android.graphics.Bitmap;
 import android.view.View;

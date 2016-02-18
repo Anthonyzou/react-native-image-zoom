@@ -1,5 +1,8 @@
 # React image pan and zoom for Android
 
+This is still very basic since I am quite new to React. There is plenty of room for improvment by adding
+additional react bindings for props and callbacks.
+
 ## Include in your App
 
 

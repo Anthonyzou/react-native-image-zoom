@@ -1,4 +1,4 @@
-package com.imager;
+package com.image.zoom;
 
 /**
  * Created by azou on 15/02/16.
@@ -37,7 +37,7 @@ public class ReactImageZoom implements ReactPackage {
       ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(reactApplicationContext).build();
       ImageLoader.getInstance().init(config);
     return Arrays.<ViewManager>asList(
-        new com.imager.ViewManager(ImageLoader.getInstance())
+        new com.image.zoom.ViewManager(ImageLoader.getInstance())
     );
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-native-image-zoom",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "React Native wrappers for PhotoView and Picasso",
   "main": "index.js",
   "scripts": {
