@@ -26,10 +26,10 @@ export default class ImageViewZoom extends Component {
   }
 
   render() {
-    return <ImageViewZoom {...this.props} />;
+    return <ImageZoomView {...this.props} />;
   }
 }
 
-const ImageViewZoom = requireNativeComponent('ImageViewZoom', ImageViewZoom, {
+const ImageZoomView = requireNativeComponent('ImageViewZoom', ImageViewZoom, {
   nativeOnly: {onChange: true}
 });

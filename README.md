@@ -6,7 +6,7 @@
 Installation
 ------------
 
-Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/package/react-native-image-zoom). Inside your React Native project, run ([example](https://github.com/aakashns/react-native-image-zoom-example/commit/e6b83bf3d2238cf7e4ec3688519f38b2544ccad5)):
+Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/package/react-native-image-zoom). Inside your React Native project, run ([example](https://github.com/aakashns/react-native-image-zoom-example/commit/a1c2de9c208a834fcf8fef6dbc736c370293ce7a)):
 ```bash
 npm install --save react-native-image-zoom
 ```
@@ -29,7 +29,7 @@ Next, you need to change the `MainActivity` of your app to register `ReactNative
 ```java
 import com.imager.ReactImageZoom; // add this import
 
-public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+public class MainActivity extends ReactActivity {
     //...
 
     @Override
