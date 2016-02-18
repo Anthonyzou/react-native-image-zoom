@@ -30,7 +30,7 @@ dependencies {
 
 Next, you need to change the `MainActivity` of your app to register `ReactNativeDialogsPackage` :
 ```java
-import com.imager.ReactImageZoom; // add this import
+import com.image.zoom.ReactImageZoom; // add this import
 
 public class MainActivity extends ReactActivity {
     //...
