@@ -1,11 +1,24 @@
 {
   "name": "react-native-image-zoom",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "React Native wrappers for PhotoView and Picasso",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anthonyzou/react-image-zoom.git"
+  },
+  "keywords": [
+    "react-native",
+    "android",
+    "react-component"
+  ],
   "author": "Anthony Ou",
-  "license": "ISC"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anthonyzou/react-image-zoom/issues"
+  },
+  "homepage": "https://github.com/Anthonyzou/react-image-zoom#readme"
 }
