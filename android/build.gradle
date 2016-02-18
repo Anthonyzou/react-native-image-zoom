@@ -23,7 +23,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.facebook.react:react-native:0.20.+'
     compile 'com.commit451:PhotoView:1.2.4'
-    compile 'com.squareup.picasso:picasso:+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 buildscript {
     repositories {
