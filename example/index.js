@@ -27,7 +27,7 @@ class Example extends Component {
     return (
       <View style={styles.container}>
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
-        <Image style={styles.image} src={this.state.text}></Image>
+        <Image tintColor="red" style={styles.image} src={this.state.text}></Image>
       </View>
     );
   }

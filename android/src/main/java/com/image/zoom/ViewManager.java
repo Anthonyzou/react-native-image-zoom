@@ -62,5 +62,13 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             }
         });
     }
+    @ReactProp(name = "tintColor", customType = "Color")
+    public void setTintColor(PhotoView view, @Nullable Integer tintColor) {
+        if (tintColor == null) {
+            view.clearColorFilter();
+        } else {
+            view.setColorFilter(tintColor);
+        }
+    }
 
 }
