@@ -10,21 +10,29 @@ import React, {
   Text,
   View,
   Dimensions,
+  TextInput,
   // Image,
 } from 'react-native';
 
 import Image from 'react-native-image-zoom'
 
 class example extends Component {
+  constructor(a,b){
+    super(a,b)
+    this.state = {
+      text:'http://placehold.it/100'
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.image} src={"http://placehold.it/300"}></Image>
+        <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
+        <Image style={styles.image} src={this.state.text}></Image>
       </View>
     );
   }
 }
-var {height, width} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
