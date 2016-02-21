@@ -19,8 +19,8 @@ import uk.co.senab.photoview.PhotoView;
  * Created by azou on 15/02/16.
  */
 public class ViewManager extends SimpleViewManager<PhotoView> {
-    PhotoView attacher;
-    ImageLoader imageLoader;
+    private PhotoView photoView;
+    private ImageLoader imageLoader;
 
     private Float initScale = 1.0f;
 
@@ -36,8 +36,8 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
     @Override
     public PhotoView createViewInstance(ThemedReactContext reactContext) {
-        attacher = new PhotoView(reactContext);
-        return attacher;
+        photoView = new PhotoView(reactContext);
+        return photoView;
     }
 
     // In JS this is Image.props.source.uri
@@ -56,7 +56,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                attacher.setScale(initScale);
+                photoView.setScale(initScale);
             }
 
             @Override
@@ -65,6 +65,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             }
         });
     }
+
     @ReactProp(name = "tintColor", customType = "Color")
     public void setTintColor(PhotoView view, @Nullable Integer tintColor) {
         if (tintColor == null) {
@@ -110,7 +111,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             break;
         }
         
-        attacher.setScaleType(value);
-    }    
+        photoView.setScaleType(value);
+    }
 
 }

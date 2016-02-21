@@ -8,10 +8,10 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View,
+  ScrollView,
   Dimensions,
   TextInput,
-  // Image,
+  View,
 } from 'react-native';
 
 import Image from 'react-native-image-zoom'
@@ -20,14 +20,15 @@ class Example extends Component {
   constructor(a,b){
     super(a,b)
     this.state = {
-      text:'http://placehold.it/100'
+      text:'http://placehold.it/500'
     }
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{flex:1}}>
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
-        <Image tintColor="red" style={styles.image} src={this.state.text} scale="2.0" scaleType="center"></Image>
+        <Image style={styles.image} src={this.state.text}></Image>
+        <Image tintColor="rgba(0,0,0,.5)" style={styles.image} src={this.state.text} scaleType="centerInside"></Image>
       </View>
     );
   }
@@ -42,17 +43,15 @@ class main extends Component{
     )
   }
 }
+
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   image:{
-    width: width,
-    flex:1,
+    height: 200,
   }
 });
 

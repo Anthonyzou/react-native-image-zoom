@@ -11,7 +11,7 @@ export default class ImageViewZoom extends Component {
     ...View.propTypes,
     src: PropTypes.string,
     scale: PropTypes.string,
-    scaleType: PropTypes.string    
+    scaleType: PropTypes.string
   };
 
   constructor(props) {

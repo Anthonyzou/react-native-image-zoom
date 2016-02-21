@@ -24,20 +24,20 @@ public class ReactImageZoom implements ReactPackage {
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
-    return Collections.emptyList();
+      return Collections.emptyList();
   }
 
   @Override
   public List<Class<? extends JavaScriptModule>> createJSModules() {
-    return Collections.emptyList();
+      return Collections.emptyList();
   }
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
       ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(reactApplicationContext).build();
       ImageLoader.getInstance().init(config);
-    return Arrays.<ViewManager>asList(
-        new com.image.zoom.ViewManager(ImageLoader.getInstance())
-    );
+      return Arrays.<ViewManager>asList(
+          new com.image.zoom.ViewManager(ImageLoader.getInstance())
+      );
   }
 }

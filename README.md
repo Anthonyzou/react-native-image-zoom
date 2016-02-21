@@ -9,7 +9,7 @@ additional react bindings for props and callbacks.
 Installation
 ------------
 
-Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/package/react-native-image-zoom). Inside your React Native project, run ([example](https://github.com/aakashns/react-native-image-zoom-example/commit/a1c2de9c208a834fcf8fef6dbc736c370293ce7a)):
+Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/package/react-native-image-zoom). Inside your React Native project, run ([example](https://github.com/Anthonyzou/react-native-image-zoom/tree/master/example)):
 ```bash
 npm install --save react-native-image-zoom
 ```
