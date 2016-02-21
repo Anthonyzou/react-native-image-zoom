@@ -28,7 +28,7 @@ class Example extends Component {
       <View style={{flex:1}}>
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
         <Image style={styles.image} src={this.state.text}></Image>
-        <Image tintColor="rgba(0,0,0,.5)" style={styles.image} src={this.state.text} scaleType="centerInside"></Image>
+        <Image tintColor="rgba(0,0,0,.5)" style={styles.image} src={this.state.text} scale="2.0" scaleType="center"></Image>
       </View>
     );
   }
