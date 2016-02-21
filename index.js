@@ -9,7 +9,9 @@ import React,{
 export default class ImageViewZoom extends Component {
   static propTypes = {
     ...View.propTypes,
-    src: PropTypes.string
+    src: PropTypes.string,
+    scale: PropTypes.string,
+    scaleType: PropTypes.string    
   };
 
   constructor(props) {

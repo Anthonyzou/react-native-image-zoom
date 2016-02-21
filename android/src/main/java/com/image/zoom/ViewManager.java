@@ -2,6 +2,7 @@ package com.image.zoom;
 
 import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.ImageView.ScaleType;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -20,6 +21,8 @@ import uk.co.senab.photoview.PhotoView;
 public class ViewManager extends SimpleViewManager<PhotoView> {
     PhotoView attacher;
     ImageLoader imageLoader;
+
+    private Float initScale = 1.0f;
 
     public ViewManager(ImageLoader instance) {
         this.imageLoader = instance;
@@ -53,7 +56,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-
+                attacher.setScale(initScale);
             }
 
             @Override
@@ -70,5 +73,44 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             view.setColorFilter(tintColor);
         }
     }
+
+    @ReactProp(name = "scale")
+    public void setScale(PhotoView view, String scale) {
+        initScale = Float.parseFloat(scale);
+    }
+
+    @ReactProp(name = "scaleType")
+    public void setScaleType(PhotoView view, String scaleType) {
+        ScaleType value = ScaleType.CENTER;
+
+        switch (scaleType) {
+        case "center":
+            value = ScaleType.CENTER;
+            break;
+        case "centerCrop":
+            value = ScaleType.CENTER_CROP;
+            break;
+        case "centerInside":
+            value = ScaleType.CENTER_INSIDE;
+            break;
+        case "fitCenter":
+            value = ScaleType.FIT_CENTER;
+            break;
+        case "fitStart":
+            value = ScaleType.FIT_START;
+            break;
+        case "fitEnd":
+            value = ScaleType.FIT_END;
+            break;
+        case "fitXY":
+            value = ScaleType.FIT_XY;
+            break;
+        case "matrix":
+            value = ScaleType.MATRIX;
+            break;
+        }
+        
+        attacher.setScaleType(value);
+    }    
 
 }
