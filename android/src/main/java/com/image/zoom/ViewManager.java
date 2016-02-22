@@ -1,15 +1,14 @@
 package com.image.zoom;
 
-import android.graphics.Bitmap;
-import android.view.View;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import android.widget.ImageView.ScaleType;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import javax.annotation.Nullable;
 
@@ -20,12 +19,10 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class ViewManager extends SimpleViewManager<PhotoView> {
     private PhotoView photoView;
-    private ImageLoader imageLoader;
 
     private Float initScale = 1.0f;
 
-    public ViewManager(ImageLoader instance) {
-        this.imageLoader = instance;
+    public ViewManager() {
     }
 
     @Override
@@ -43,27 +40,23 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
     // In JS this is Image.props.source.uri
     @ReactProp(name = "src")
     public void setSource(PhotoView view, @Nullable String source) {
-        imageLoader.displayImage(source, view, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
+        Glide
+            .with(view.getContext())
+            .load(source)
+            .listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    return false;
+                }
 
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                photoView.setScale(initScale);
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-
-            }
-        });
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    photoView.setScale(initScale);
+                    return false;
+                }
+            })
+            .into(view)
+        ;
     }
 
     @ReactProp(name = "tintColor", customType = "Color")

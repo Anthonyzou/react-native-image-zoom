@@ -16,6 +16,7 @@ import React, {
 
 import Image from 'react-native-image-zoom'
 import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
+
 class Example extends Component {
   constructor(a,b){
     super(a,b)

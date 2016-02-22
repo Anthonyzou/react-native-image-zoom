@@ -20,7 +20,6 @@ export default class ImageViewZoom extends Component {
   }
 
   setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
   }
 
   _onChange(event: Event) {

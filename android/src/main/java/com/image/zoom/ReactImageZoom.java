@@ -8,8 +8,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,20 +23,18 @@ public class ReactImageZoom implements ReactPackage {
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
-      return Collections.emptyList();
+    return Collections.emptyList();
   }
 
   @Override
   public List<Class<? extends JavaScriptModule>> createJSModules() {
-      return Collections.emptyList();
+    return Collections.emptyList();
   }
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
-      ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(reactApplicationContext).build();
-      ImageLoader.getInstance().init(config);
       return Arrays.<ViewManager>asList(
-          new com.image.zoom.ViewManager(ImageLoader.getInstance())
+          new com.image.zoom.ViewManager()
       );
   }
 }
