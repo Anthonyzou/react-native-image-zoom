@@ -11,7 +11,8 @@ export default class ImageViewZoom extends Component {
     ...View.propTypes,
     src: PropTypes.string,
     scale: PropTypes.string,
-    scaleType: PropTypes.string
+    scaleType: PropTypes.string,
+    onTap : PropTypes.func,
   };
 
   constructor(props) {
@@ -32,5 +33,4 @@ export default class ImageViewZoom extends Component {
 }
 
 const ImageZoomView = requireNativeComponent('ImageViewZoom', ImageViewZoom, {
-  nativeOnly: {onChange: true}
 });
