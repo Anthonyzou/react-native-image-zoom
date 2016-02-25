@@ -3,6 +3,13 @@
 This is still very basic since I am quite new to React. There is plenty of room for improvment by adding
 additional react bindings for props and callbacks.
 
+##### Props:
+| Property | Type | Default | Description |
+|---------------|----------|--------------|----------------------------------------------------------------|
+| src | string | null | http source of the image |
+| tintColor | string | null | optional tintColor |
+
+
 ## Include in your App
 
 
@@ -43,3 +50,12 @@ public class MainActivity extends ReactActivity {
       );
     }
 ```
+
+---
+
+TeamLockr image zoom
+Team Lockr image zoom for react native
+
+These are functions created by the TeamLockr Team created for the TeamLockr platform.
+
+---
