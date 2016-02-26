@@ -8,6 +8,7 @@ additional react bindings for props and callbacks.
 |---------------|----------|--------------|----------------------------------------------------------------|
 | src | string | null | http source of the image |
 | tintColor | string | null | optional tintColor |
+| onTap | function | null | optional on tap listener |
 
 
 ## Include in your App
