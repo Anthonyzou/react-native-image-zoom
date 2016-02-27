@@ -11,7 +11,6 @@ import React, {
   ScrollView,
   Dimensions,
   TextInput,
-  View,
 } from 'react-native';
 
 import Image from 'react-native-image-zoom'
@@ -26,11 +25,13 @@ class Example extends Component {
   }
   render() {
     return (
-      <View style={{flex:1}}>
+      <ScrollView>
+
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
-        <Image scale={1.0} onTap={()=>{console.log('ON TAP')}} style={styles.image} src={this.state.text}></Image>
-        <Image scale={2} onTap={()=>{console.log('ON TAP')}} style={styles.image} src={this.state.text}></Image>
-      </View>
+          <Image onTap={()=>{console.log('ON TAP')}} style={styles.image} source={{uri:this.state.text}}></Image>
+          <Image scale={2} resizeMode={"center"} onTap={()=>{console.log('ON TAP')}} style={styles.image} source={{uri:this.state.text}}></Image>
+          <Image scale={1} style={styles.image} source={require('./stock-vector-car-on-the-golden-state-bridge-265288760.jpg')}></Image>
+      </ScrollView>
     );
   }
 }
@@ -48,12 +49,9 @@ class main extends Component{
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
   },
   image:{
-    height: 200,
-    flex:1,
+    height: 250
   }
 });
 

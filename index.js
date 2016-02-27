@@ -6,6 +6,9 @@ import React,{
   View
 } from 'react-native';
 
+import resolveAssetSource from 'resolveAssetSource';
+import merge from 'merge';
+
 export default class ImageViewZoom extends Component {
   static propTypes = {
     ...View.propTypes,
@@ -13,6 +16,15 @@ export default class ImageViewZoom extends Component {
       PropTypes.shape({
         uri: PropTypes.string,
       }),
+      // Opaque type returned by require('./image.jpg')
+      PropTypes.number,
+    ]),
+    loadingIndicatorSource: PropTypes.oneOfType([
+      PropTypes.shape({
+        uri: PropTypes.string,
+      }),
+      // Opaque type returned by require('./image.jpg')
+      PropTypes.number,
     ]),
     scale: PropTypes.number,
     scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
@@ -21,20 +33,35 @@ export default class ImageViewZoom extends Component {
 
   constructor(props) {
     super(props);
-    this._onChange = this._onChange.bind(this);
   }
 
   setNativeProps(nativeProps) {
   }
 
   _onChange(event: Event) {
-    this.props.onLoadComplete && this.props.onLoadComplete(event.nativeEvent.value);
   }
 
   render() {
-    return <ImageZoomView {...this.props} />;
+    const source = resolveAssetSource(this.props.source);
+    const loadingIndicatorSource = resolveAssetSource(this.props.loadingIndicatorSource);
+    if (source && source.uri){
+
+
+      const props = {...this.props,...{
+        src: source.uri,
+        loadingIndicatorSource : loadingIndicatorSource ? loadingIndicatorSource.uri : null,
+      }};
+
+      return <ZoomImage {...props} />;
+    }
+    return null
   }
 }
 
-const ImageZoomView = requireNativeComponent('ImageViewZoom', ImageViewZoom, {
-});
+const cfg = {
+  nativeOnly: {
+    src: true,
+    loadingIndicatorSrc: true,
+  },
+};
+const ZoomImage = requireNativeComponent('ImageViewZoom', ImageViewZoom, cfg);

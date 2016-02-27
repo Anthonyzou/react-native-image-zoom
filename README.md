@@ -6,9 +6,11 @@ additional react bindings for props and callbacks.
 ##### Props:
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| src | string | null | http source of the image |
+| souce | Object | null | same as the react image format |
 | tintColor | string | null | optional tintColor |
 | onTap | function | null | optional on tap listener |
+| scale | float | null | optional scale amount |
+| scaleType | string | null | one of center, centerCrop, centerInside, fitCenter, fitStart, fitEnd, fitXY, matrix|
 
 
 ## Include in your App

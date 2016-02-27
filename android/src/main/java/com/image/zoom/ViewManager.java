@@ -5,8 +5,10 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import android.net.Uri;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView.ScaleType;
 
@@ -19,6 +21,8 @@ import com.facebook.react.uimanager.ThemedReactContext;
 
 import com.facebook.react.uimanager.events.EventDispatcher;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -32,16 +36,17 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ViewManager extends SimpleViewManager<PhotoView> {
     private PhotoView photoView;
     private EventDispatcher mEventDispatcher;
-    private Float initScale = 1.0f;
+    private SparseArray<Float> scales = new SparseArray<>();
+    private ResourceDrawableIdHelper mResourceDrawableIdHelper;
 
     public ViewManager() {
+        mResourceDrawableIdHelper = new ResourceDrawableIdHelper();
     }
 
     @Override
     public String getName() {
         return "ImageViewZoom";
     }
-
 
     @Override
     public PhotoView createViewInstance(ThemedReactContext reactContext) {
@@ -50,13 +55,31 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         return photoView;
     }
 
-    @ReactProp(name = "source")
-    public void setSource(final PhotoView view, @Nullable ReadableMap source) {
-        if (source != null && source.hasKey("uri")) {
-            String data = source.getString("uri");
+    @ReactProp(name = "src")
+    public void setSource(final PhotoView view, @Nullable String source) {
+        @Nullable Uri mUri = null;
+        if (source == null) return;
+
+        try {
+            mUri = Uri.parse(source);
+            // Verify scheme is set, so that relative uri (used by static resources) are not handled.
+            if (mUri.getScheme() == null) {
+                mUri = null;
+            }
+        } catch (Exception e) {
+            // ignore malformed uri, then attempt to extract resource ID.
+        }
+        if (mUri == null) {
+            mUri = mResourceDrawableIdHelper.getResourceDrawableUri(view.getContext(), source);
             Glide
                 .with(view.getContext())
-                .load(data)
+                .load(mUri)
+                .into(view)
+            ;
+        } else {
+            Glide
+                .with(view.getContext())
+                .load(mUri.toString())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model,
@@ -70,23 +93,26 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                                                    Target<GlideDrawable> target,
                                                    boolean isFromMemoryCache,
                                                    boolean isFirstResource) {
-                        view.setScale(initScale, true);
+                        Log.d("id2", String.valueOf(view.getId()));
+                        Float scale = scales.get(view.getId());
+                        if(scale != null){
+                            view.setScale(scale, true);
+                        }
                         return false;
                     }
                 })
                 .into(view)
-
             ;
-
-            view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
-                @Override
-                public void onViewTap(View view, float x, float y) {
-                    mEventDispatcher.dispatchEvent(
-                            new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_TAP)
-                    );
-                }
-            });
         }
+
+        view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+            @Override
+            public void onViewTap(View view, float x, float y) {
+                mEventDispatcher.dispatchEvent(
+                        new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_TAP)
+                );
+            }
+        });
     }
 
     @Override
@@ -109,7 +135,9 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
     @ReactProp(name = "scale")
     public void setScale(PhotoView view, @Nullable float scale) {
-        initScale = scale;
+        Log.d("id1", String.valueOf(view.getId()));
+        scales.put(view.getId(), scale);
+        view.setScale(scale);
     }
 
     @ReactProp(name = "scaleType")
