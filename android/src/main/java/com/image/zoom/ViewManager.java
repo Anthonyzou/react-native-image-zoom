@@ -31,7 +31,6 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ViewManager extends SimpleViewManager<PhotoView> {
     private PhotoView photoView;
     private EventDispatcher mEventDispatcher;
-    private Float initScale = 1.0f;
 
     public ViewManager() {
     }
@@ -51,7 +50,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
     // In JS this is Image.props.source.uri
     @ReactProp(name = "src")
-    public void setSource(PhotoView view, @Nullable String source) {
+    public void setSource(final PhotoView view, @Nullable String source) {
         Glide
             .with(view.getContext())
             .load(source)
@@ -68,11 +67,11 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                                                Target<GlideDrawable> target,
                                                boolean isFromMemoryCache,
                                                boolean isFirstResource) {
-                    photoView.setScale(initScale);
                     return false;
                 }
             })
             .into(view)
+
         ;
 
         view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
@@ -104,8 +103,8 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
     }
 
     @ReactProp(name = "scale")
-    public void setScale(PhotoView view, String scale) {
-        initScale = Float.parseFloat(scale);
+    public void setScale(PhotoView view, @Nullable float scale) {
+        view.setScale(scale, true);
     }
 
     @ReactProp(name = "scaleType")

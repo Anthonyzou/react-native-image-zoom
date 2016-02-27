@@ -10,8 +10,8 @@ export default class ImageViewZoom extends Component {
   static propTypes = {
     ...View.propTypes,
     src: PropTypes.string,
-    scale: PropTypes.string,
-    scaleType: PropTypes.string,
+    scale: PropTypes.number,
+    scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
     onTap : PropTypes.func,
   };
 

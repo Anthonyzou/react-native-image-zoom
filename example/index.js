@@ -21,15 +21,15 @@ class Example extends Component {
   constructor(a,b){
     super(a,b)
     this.state = {
-      text:'http://placehold.it/500'
+      text:'http://placehold.it/250'
     }
   }
   render() {
     return (
       <View style={{flex:1}}>
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
-        <Image onTap={()=>{console.log('ON TAP')}} style={styles.image} src={this.state.text}></Image>
-        <Image tintColor="rgba(0,0,0,.5)" style={styles.image} src={this.state.text} scale="2.0" scaleType="center"></Image>
+        <Image scale={1.0} onTap={()=>{console.log('ON TAP')}} style={styles.image} src={this.state.text}></Image>
+        <Image scale={2} onTap={()=>{console.log('ON TAP')}} style={styles.image} src={this.state.text}></Image>
       </View>
     );
   }
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   image:{
     height: 200,
+    flex:1,
   }
 });
 
