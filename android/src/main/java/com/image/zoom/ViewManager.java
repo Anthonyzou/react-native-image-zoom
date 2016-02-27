@@ -93,7 +93,6 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                                                    Target<GlideDrawable> target,
                                                    boolean isFromMemoryCache,
                                                    boolean isFirstResource) {
-                        Log.d("id2", String.valueOf(view.getId()));
                         Float scale = scales.get(view.getId());
                         if(scale != null){
                             view.setScale(scale, true);
@@ -135,7 +134,6 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
     @ReactProp(name = "scale")
     public void setScale(PhotoView view, @Nullable float scale) {
-        Log.d("id1", String.valueOf(view.getId()));
         scales.put(view.getId(), scale);
         view.setScale(scale);
     }
