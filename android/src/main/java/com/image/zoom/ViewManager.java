@@ -49,41 +49,43 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         return photoView;
     }
 
-    // In JS this is Image.props.source.uri
-    @ReactProp(name = "src")
-    public void setSource(final PhotoView view, @Nullable String source) {
-        Glide
-            .with(view.getContext())
-            .load(source)
-            .listener(new RequestListener<String, GlideDrawable>() {
-                @Override
-                public boolean onException(Exception e, String model,
-                                           Target<GlideDrawable> target,
-                                           boolean isFirstResource) {
-                    return false;
-                }
-
-                @Override
-                public boolean onResourceReady(GlideDrawable resource, String model,
+    @ReactProp(name = "source")
+    public void setSource(final PhotoView view, @Nullable ReadableMap source) {
+        if (source != null && source.hasKey("uri")) {
+            String data = source.getString("uri");
+            Glide
+                .with(view.getContext())
+                .load(data)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model,
                                                Target<GlideDrawable> target,
-                                               boolean isFromMemoryCache,
                                                boolean isFirstResource) {
-                    view.setScale(initScale, true);
-                    return false;
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model,
+                                                   Target<GlideDrawable> target,
+                                                   boolean isFromMemoryCache,
+                                                   boolean isFirstResource) {
+                        view.setScale(initScale, true);
+                        return false;
+                    }
+                })
+                .into(view)
+
+            ;
+
+            view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+                @Override
+                public void onViewTap(View view, float x, float y) {
+                    mEventDispatcher.dispatchEvent(
+                            new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_TAP)
+                    );
                 }
-            })
-            .into(view)
-
-        ;
-
-        view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
-            @Override
-            public void onViewTap(View view, float x, float y) {
-                mEventDispatcher.dispatchEvent(
-                        new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_TAP)
-                );
-            }
-        });
+            });
+        }
     }
 
     @Override
