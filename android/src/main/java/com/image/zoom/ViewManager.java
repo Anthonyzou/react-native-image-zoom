@@ -107,7 +107,6 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
     @ReactProp(name = "scale")
     public void setScale(PhotoView view, @Nullable float scale) {
         initScale = scale;
-        view.setScale(scale, true);
     }
 
     @ReactProp(name = "scaleType")
