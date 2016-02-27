@@ -9,7 +9,11 @@ import React,{
 export default class ImageViewZoom extends Component {
   static propTypes = {
     ...View.propTypes,
-    src: PropTypes.string,
+    source: PropTypes.oneOfType([
+      PropTypes.shape({
+        uri: PropTypes.string,
+      }),
+    ]),
     scale: PropTypes.number,
     scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
     onTap : PropTypes.func,
