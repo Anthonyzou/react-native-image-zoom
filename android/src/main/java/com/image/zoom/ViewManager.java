@@ -31,6 +31,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ViewManager extends SimpleViewManager<PhotoView> {
     private PhotoView photoView;
     private EventDispatcher mEventDispatcher;
+    private Float initScale = 1.0f;
 
     public ViewManager() {
     }
@@ -67,6 +68,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                                                Target<GlideDrawable> target,
                                                boolean isFromMemoryCache,
                                                boolean isFirstResource) {
+                    view.setScale(initScale, true);
                     return false;
                 }
             })
@@ -104,6 +106,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
 
     @ReactProp(name = "scale")
     public void setScale(PhotoView view, @Nullable float scale) {
+        initScale = scale;
         view.setScale(scale, true);
     }
 
