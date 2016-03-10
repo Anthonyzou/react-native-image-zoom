@@ -10,10 +10,12 @@ import React, {
   Text,
   ScrollView,
   Dimensions,
+  ToastAndroid,
   TextInput,
 } from 'react-native';
 
-import Image from 'react-native-image-zoom'
+import Image from './zoom.js'
+import ViewPager from './ViewPager'
 import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
 
 class Example extends Component {
@@ -26,11 +28,20 @@ class Example extends Component {
   render() {
     return (
       <ScrollView>
-
         <TextInput onChangeText={(text) => this.setState({text:text})} value={this.state.text}></TextInput>
-          <Image onTap={()=>{console.log('ON TAP')}} style={styles.image} source={{uri:this.state.text}}></Image>
-          <Image scale={2} resizeMode={"center"} onTap={()=>{console.log('ON TAP')}} style={styles.image} source={{uri:this.state.text}}></Image>
-          <Image scale={1} style={styles.image} source={require('./stock-vector-car-on-the-golden-state-bridge-265288760.jpg')}></Image>
+          <Image
+            onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+            style={styles.image}
+            source={{uri:this.state.text}}></Image>
+          <Image scale={2} resizeMode={"center"}
+            onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+            style={styles.image}
+            source={{uri:this.state.text}}></Image>
+          <Image
+            scale={1}
+            style={styles.image}
+            source={require('./stock-vector-car-on-the-golden-state-bridge-265288760.jpg')}>
+          </Image>
       </ScrollView>
     );
   }
@@ -40,7 +51,9 @@ class main extends Component{
   render(){
     return (
       <Router hideNavBar={true}>
-        <Route name="Main" type="reset" component={Example}/>
+        <Route name="ViewPager" component={ViewPager}/>
+        <Route name="Main" component={Example}/>
+
       </Router>
     )
   }

@@ -1,5 +1,4 @@
 .idea
-gradlew*
 android/gradle
 npm-debug.log
 .DS_Store

@@ -12,13 +12,16 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView.ScaleType;
 
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.ThemedReactContext;
-
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.uimanager.events.EventDispatcher;
 
 import java.util.HashMap;
@@ -97,6 +100,15 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                         if(scale != null){
                             view.setScale(scale, true);
                         }
+
+                        WritableMap event = Arguments.createMap();
+                        event.putString("load", "finish");
+                        ((ReactContext) view.getContext())
+                                .getJSModule(RCTEventEmitter.class)
+                                .receiveEvent(
+                                        view.getId(),
+                                        "topChange",
+                                        event);
                         return false;
                     }
                 })
@@ -168,7 +180,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             value = ScaleType.MATRIX;
             break;
         }
-        
+
         photoView.setScaleType(value);
     }
 
