@@ -28,11 +28,11 @@ export default class ExamplePage extends Component {
   }
   render() {
     return (
-      <ViewPagerAndroid>
-        <Image scale={1} source={{uri:`http://placehold.it/200`}}/>
-        <Image scale={1} source={{uri:`http://placehold.it/200`}}/>
-        <Image scale={1} source={{uri:`http://placehold.it/200`}}/>
-        <Image scale={1} source={{uri:`http://placehold.it/200`}}/>
+      <ViewPagerAndroid style={styles.container}>
+        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
+        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
+        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
+        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
       </ViewPagerAndroid>
     );
   }
