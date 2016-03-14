@@ -34,14 +34,13 @@ class Example extends Component {
             style={styles.image}
             source={{uri:this.state.text}}></Image>
           <Image scale={2} resizeMode={"center"}
-            onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
             style={styles.image}
+            onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
             onLoad={()=>{
-              console.log("http onload")
+              ToastAndroid.show('onLoad',ToastAndroid.LONG)
             }}
             source={{uri:this.state.text}}></Image>
           <Image
-
             scale={1}
             style={styles.image}
             source={require('./stock-vector-car-on-the-golden-state-bridge-265288760.jpg')}>

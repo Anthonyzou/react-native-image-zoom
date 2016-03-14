@@ -30,12 +30,23 @@ export default class ExamplePage extends Component {
     return (
       <ViewPagerAndroid style={styles.container}>
         <Image source={{uri:"http://placehold.it/200"}}
+          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
           onLoad={()=>{
-            console.log("http onload")
-          }}/>
-        <Image source={{uri:"http://placehold.it/200"}}/>
-        <Image source={{uri:"http://placehold.it/200"}}/>
-        <Image source={{uri:"http://placehold.it/200"}}/>
+            ToastAndroid.show('onLoad',ToastAndroid.LONG)
+          }}
+        />
+        <Image source={{uri:"http://placehold.it/200"}}
+          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+          onLoad={()=>{
+            ToastAndroid.show('onLoad',ToastAndroid.LONG)
+          }}
+        />
+        <Image source={{uri:"http://placehold.it/200"}}
+          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+          onLoad={()=>{
+            ToastAndroid.show('onLoad',ToastAndroid.LONG)
+          }}
+        />
       </ViewPagerAndroid>
     );
   }

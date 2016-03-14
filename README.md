@@ -6,7 +6,7 @@ additional react bindings for props and callbacks.
 ##### Props:
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| souce | Object | null | same as the react image format `source={{uri:...}}` |
+| souce | Object | null | same as the react image format `source={{uri:'http...'}}` or `source={require('./...')}`|
 | tintColor | string | null | optional tintColor |
 | onTap | function | null | optional on tap listener |
 | scale | float | null | optional scale amount |
