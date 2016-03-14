@@ -1,16 +1,15 @@
-# React image pan and zoom for Android
+# Image pan and zoom for Android
 
-This is still very basic since I am quite new to React. There is plenty of room for improvment by adding
-additional react bindings for props and callbacks.
 
 ##### Props:
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
 | souce | Object | null | same as the react image format `source={{uri:'http...'}}` or `source={require('./...')}`|
 | tintColor | string | null | optional tintColor |
-| onTap | function | null | optional on tap listener |
 | scale | float | null | optional scale amount |
 | scaleType | string | null | one of center, centerCrop, centerInside, fitCenter, fitStart, fitEnd, fitXY, matrix|
+| onTap | function | null | optional on tap listener |
+| onLoad | function | null | optional on load listener |
 
 
 ## Include in your App
@@ -24,7 +23,7 @@ Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/packag
 npm install --save react-native-image-zoom
 ```
 
-In `android/settings.gradle`, remove the line `include ':app'` and add the following lines
+In `android/settings.gradle`
 ```
 include :react-native-image-zoom'
 project(':react-native-image-zoom').projectDir = file('../node_modules/react-native-image-zoom/android')
@@ -38,7 +37,7 @@ dependencies {
 }
 ```
 
-Next, you need to change the `MainActivity` of your app to register `ReactNativeDialogsPackage` :
+Next, you need to change the `MainActivity` of your app to register `ReactImageZoom` :
 ```java
 import com.image.zoom.ReactImageZoom; // add this import
 
