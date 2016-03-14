@@ -29,10 +29,13 @@ export default class ExamplePage extends Component {
   render() {
     return (
       <ViewPagerAndroid style={styles.container}>
-        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
-        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
-        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
-        <Image scale={1} source={{uri:"http://placehold.it/200"}}/>
+        <Image source={{uri:"http://placehold.it/200"}}
+          onLoad={()=>{
+            console.log("http onload")
+          }}/>
+        <Image source={{uri:"http://placehold.it/200"}}/>
+        <Image source={{uri:"http://placehold.it/200"}}/>
+        <Image source={{uri:"http://placehold.it/200"}}/>
       </ViewPagerAndroid>
     );
   }

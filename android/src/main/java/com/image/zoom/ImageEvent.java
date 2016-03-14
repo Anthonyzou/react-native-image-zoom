@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Created by azou on 25/02/16.
  */
-public class ImageEvent extends Event<ImageEvent> {
+class ImageEvent extends Event<ImageEvent> {
 
 
 /**
@@ -23,11 +23,12 @@ public class ImageEvent extends Event<ImageEvent> {
  */
 
 
-    @IntDef({ON_TAP})
+    @IntDef({ON_TAP, ON_LOAD})
     @Retention(RetentionPolicy.SOURCE)
     @interface ImageEventType {}
 
     public static final int ON_TAP = 1;
+    public static final int ON_LOAD = 2;
 
     private final int mEventType;
 
@@ -40,6 +41,8 @@ public class ImageEvent extends Event<ImageEvent> {
         switch(eventType) {
             case ON_TAP:
                 return "topTap";
+            case ON_LOAD:
+                return "topLoad";
             default:
                 throw new IllegalStateException("Invalid image event: " + Integer.toString(eventType));
         }

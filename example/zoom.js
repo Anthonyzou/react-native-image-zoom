@@ -19,16 +19,10 @@ export default class ImageViewZoom extends Component {
       // Opaque type returned by require('./image.jpg')
       PropTypes.number,
     ]),
-    loadingIndicatorSource: PropTypes.oneOfType([
-      PropTypes.shape({
-        uri: PropTypes.string,
-      }),
-      // Opaque type returned by require('./image.jpg')
-      PropTypes.number,
-    ]),
     scale: PropTypes.number,
     scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
     onTap : PropTypes.func,
+    onLoad : PropTypes.func,
   };
 
   constructor(props) {
@@ -38,21 +32,11 @@ export default class ImageViewZoom extends Component {
   setNativeProps(nativeProps) {
   }
 
-  _onChange(event: Event) {
-    console.log(event)
-  }
-
   render() {
     const source = resolveAssetSource(this.props.source);
-    const loadingIndicatorSource = resolveAssetSource(this.props.loadingIndicatorSource);
     if (source && source.uri){
 
-
-      const props = {...this.props,...{
-        src: source.uri,
-        loadingIndicatorSource : loadingIndicatorSource ? loadingIndicatorSource.uri : null,
-      }};
-
+      const props = {...this.props, src: source.uri };
       return <ZoomImage {...props} />;
     }
     return null
@@ -62,7 +46,6 @@ export default class ImageViewZoom extends Component {
 const cfg = {
   nativeOnly: {
     src: true,
-    loadingIndicatorSrc: true,
   },
 };
 const ZoomImage = requireNativeComponent('ImageViewZoom', ImageViewZoom, cfg);

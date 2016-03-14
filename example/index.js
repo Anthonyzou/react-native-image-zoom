@@ -36,8 +36,12 @@ class Example extends Component {
           <Image scale={2} resizeMode={"center"}
             onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
             style={styles.image}
+            onLoad={()=>{
+              console.log("http onload")
+            }}
             source={{uri:this.state.text}}></Image>
           <Image
+
             scale={1}
             style={styles.image}
             source={require('./stock-vector-car-on-the-golden-state-bridge-265288760.jpg')}>
