@@ -14,7 +14,7 @@ import React, {
   TextInput,
 } from 'react-native';
 
-import Image from './zoom.js'
+import Image from 'react-native-image-zoom'
 import ViewPager from './ViewPager'
 import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
 

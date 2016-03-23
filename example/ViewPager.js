@@ -7,6 +7,7 @@ import React, {
   View,
   TouchableHighlight,
   TextInput,
+  ToastAndroid,
   ToolbarAndroid,
   InteractionManager,
   ViewPagerAndroid,
@@ -14,7 +15,7 @@ import React, {
 
 import _ from 'lodash'
 import {Actions} from 'react-native-router-flux'
-import Image from './zoom.js'
+import Image from 'react-native-image-zoom'
 
 
 export default class ExamplePage extends Component {

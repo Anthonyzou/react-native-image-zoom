@@ -3,12 +3,12 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "setupDev" : "rm -rf node_modules/react-native-image-zoom/index.js node_modules/react-native-image-zoom/android; ln -s  ../../../android/ node_modules/react-native-image-zoom/android;ln -s  ../../../index.js node_modules/react-native-image-zoom/index.js"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react-native": "^0.20.0",
-    "react-native-image-zoom": "*",
+    "react": "^0.14.7",
+    "react-native": "^0.22.2",
+    "react-native-image-zoom": "../.",
     "react-native-router-flux": "^2.3.8"
   }
 }
