@@ -11,6 +11,19 @@
 | onTap | function | null | optional on tap listener |
 | onLoad | function | null | optional on load listener |
 
+## Example
+
+```jsx
+import Image from 'react-native-image-zoom'
+
+<Image
+  onTap={ ()=> {ToastAndroid.show('ON TAP',ToastAndroid.SHORT)}}
+  onLoad={ ()=> {
+    ToastAndroid.show('onLoad',ToastAndroid.SHORT)
+  }}
+  source={{uri:this.state.text}}>
+</Image>
+```
 
 ## Include in your App
 
