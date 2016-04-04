@@ -1,6 +1,6 @@
 {
   "name": "react-native-image-zoom",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "React Native wrappers for PhotoView and universal-image-loader",
   "main": "index.js",
   "scripts": {

@@ -2,6 +2,7 @@ package com.image.zoom;
 
 import android.net.Uri;
 import android.os.SystemClock;
+import android.util.Base64;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView.ScaleType;
@@ -10,16 +11,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.EventDispatcher;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.util.Map;
 
@@ -58,6 +55,16 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         @Nullable Uri mUri = null;
         if (source == null) return;
 
+        //handle base64
+        if (source.startsWith("data:image/png;base64,")){
+            Glide.with(view.getContext())
+                    .load(Base64.decode(source.replaceAll("data:image\\/.*;base64,", ""), Base64.DEFAULT))
+                    .into(view)
+            ;
+            return;
+        }
+
+        // handle bundled app resources
         try {
             mUri = Uri.parse(source);
             // Verify scheme is set, so that relative uri (used by static resources) are not handled.
@@ -67,6 +74,7 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         } catch (Exception e) {
             // ignore malformed uri, then attempt to extract resource ID.
         }
+        // Handle an http address
         if (mUri == null) {
             mUri = mResourceDrawableIdHelper.getResourceDrawableUri(view.getContext(), source);
             Glide
