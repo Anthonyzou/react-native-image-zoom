@@ -1,6 +1,7 @@
 package com.image.zoom;
 import android.support.annotation.IntDef;
 
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
@@ -62,6 +63,12 @@ class ImageEvent extends Event<ImageEvent> {
 
     @Override
     public void dispatch(RCTEventEmitter rctEventEmitter) {
-        rctEventEmitter.receiveEvent(getViewTag(), getEventName(), null);
+        rctEventEmitter.receiveEvent(getViewTag(), getEventName(), map);
+    }
+
+    private WritableMap map = null;
+    public ImageEvent setExtras(WritableMap map){
+        this.map = map;
+        return this;
     }
 }

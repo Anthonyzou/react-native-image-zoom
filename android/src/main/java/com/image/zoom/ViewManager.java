@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -55,10 +57,44 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         @Nullable Uri mUri = null;
         if (source == null) return;
 
+        RequestListener listener = new RequestListener<String, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, String model,
+                                       Target<GlideDrawable> target,
+                                       boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model,
+                                           Target<GlideDrawable> target,
+                                           boolean isFromMemoryCache,
+                                           boolean isFirstResource) {
+                Float scale = scales.get(view.getId());
+                if(scale != null) {
+                    view.setScale(scale, true);
+                }
+
+                final int width = view.getWidth();
+                final int height = view.getHeight();
+
+                WritableMap map = Arguments.createMap();
+                map.putInt("height", height);
+                map.putInt("width", width);
+                mEventDispatcher.dispatchEvent(
+                        new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_LOAD)
+                        .setExtras(map)
+                );
+                return false;
+            }
+        };
+
         //handle base64
         if (source.startsWith("data:image/png;base64,")){
-            Glide.with(view.getContext())
+            Glide
+                    .with(view.getContext())
                     .load(Base64.decode(source.replaceAll("data:image\\/.*;base64,", ""), Base64.DEFAULT))
+                    .listener(listener)
                     .into(view)
             ;
             return;
@@ -74,42 +110,21 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         } catch (Exception e) {
             // ignore malformed uri, then attempt to extract resource ID.
         }
-        // Handle an http address
+
         if (mUri == null) {
             mUri = mResourceDrawableIdHelper.getResourceDrawableUri(view.getContext(), source);
             Glide
                     .with(view.getContext())
                     .load(mUri)
+                    .listener(listener)
                     .into(view)
             ;
         } else {
+            // Handle an http address
             Glide
                     .with(view.getContext())
                     .load(mUri.toString())
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model,
-                                                   Target<GlideDrawable> target,
-                                                   boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model,
-                                                       Target<GlideDrawable> target,
-                                                       boolean isFromMemoryCache,
-                                                       boolean isFirstResource) {
-                            Float scale = scales.get(view.getId());
-                            if(scale != null){
-                                view.setScale(scale, true);
-                            }
-
-                            mEventDispatcher.dispatchEvent(
-                                    new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_LOAD)
-                            );
-                            return false;
-                        }
-                    })
+                    .listener(listener)
                     .into(view)
             ;
         }

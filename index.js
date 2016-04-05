@@ -37,7 +37,6 @@ export default class ImageViewZoom extends Component {
     if (source && source.uri){
 
       const props = {...this.props, src: source.uri };
-      console.log(props.onLoad)
       return <ZoomImage {...props} />;
     }
     return null
