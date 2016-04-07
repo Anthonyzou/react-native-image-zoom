@@ -6,7 +6,7 @@ import React,{
   View
 } from 'react-native';
 
-import resolveAssetSource from 'resolveAssetSource';
+// import resolveAssetSource from 'resolveAssetSource';
 
 export default class ImageViewZoom extends Component {
   static propTypes = {
@@ -32,7 +32,7 @@ export default class ImageViewZoom extends Component {
   }
 
   render() {
-    const source = resolveAssetSource(this.props.source);
+    const source = (this.props.source);
     if (source && source.uri){
 
       const props = {...this.props, src: source.uri };
