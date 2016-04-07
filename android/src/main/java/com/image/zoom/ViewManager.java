@@ -94,7 +94,6 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             Glide
                     .with(view.getContext())
                     .load(Base64.decode(source.replaceAll("data:image\\/.*;base64,", ""), Base64.DEFAULT))
-                    .listener(listener)
                     .into(view)
             ;
             return;
@@ -116,7 +115,6 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             Glide
                     .with(view.getContext())
                     .load(mUri)
-                    .listener(listener)
                     .into(view)
             ;
         } else {

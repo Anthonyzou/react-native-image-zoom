@@ -7,7 +7,6 @@ import React,{
 } from 'react-native';
 
 import resolveAssetSource from 'resolveAssetSource';
-import merge from 'merge';
 
 export default class ImageViewZoom extends Component {
   static propTypes = {
