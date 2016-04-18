@@ -4,7 +4,7 @@
 ##### Props:
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| souce | Object | null | same as the react image format `source={{uri:'http...'}}` or `source={require('./...')}`|
+| source | Object | null | same as the react image format `source={{uri:'http...'}}` or `source={require('./...')}`|
 | tintColor | string | null | optional tintColor |
 | scale | float | null | optional scale amount |
 | scaleType | string | null | one of center, centerCrop, centerInside, fitCenter, fitStart, fitEnd, fitXY, matrix|
