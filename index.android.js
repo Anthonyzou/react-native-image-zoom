@@ -3,10 +3,11 @@ import React,{
   requireNativeComponent,
   Component,
   PropTypes,
-  View
+  View,
 } from 'react-native';
 
-// import resolveAssetSource from 'resolveAssetSource';
+// wtf?
+var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 export default class ImageViewZoom extends Component {
   static propTypes = {
@@ -32,7 +33,7 @@ export default class ImageViewZoom extends Component {
   }
 
   render() {
-    const source = (this.props.source);
+    const source = resolveAssetSource(this.props.source);
     if (source && source.uri){
 
       const props = {...this.props, src: source.uri };
