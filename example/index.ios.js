@@ -18,7 +18,8 @@ import React, {
 } from 'react-native';
 
 import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
-import Zoom from './zoom'
+import Zoom from 'react-native-image-zoom'
+
 class Example extends Component {
   constructor(a,b){
     super(a,b)
@@ -28,10 +29,11 @@ class Example extends Component {
   }
   render() {
     return (
-
-        <Zoom style={{width:500, height: 500}}
-          maximumZoomScale={3} minimumZoomScale={.5}
-          source={{uri:'https://placeholdit.imgix.net/~text?txtsize=47&txt=500%C3%97500&w=500&h=500'}}/>
+      <Zoom
+        style={{width:500, height: 500}}
+        maximumZoomScale={3}
+        minimumZoomScale={.5}
+        source={{uri:'https://placeholdit.imgix.net/~text?txtsize=47&txt=500%C3%97500&w=500&h=500'}}/>
     );
   }
 }
