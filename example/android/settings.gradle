@@ -1,5 +1,5 @@
 rootProject.name = 'example'
 
 include ':app'
-include ':react-native-zoomable'
-project(':react-native-zoomable').projectDir = file('../node_modules/react-native-image-zoom/android')
+include ':react-native-image-zoom'
+project(':react-native-image-zoom').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-zoom/android')

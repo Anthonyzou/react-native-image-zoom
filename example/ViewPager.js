@@ -11,6 +11,8 @@ import React, {
   ToolbarAndroid,
   InteractionManager,
   ViewPagerAndroid,
+  Dimensions,
+  NativeModules,
 } from 'react-native';
 
 import _ from 'lodash'
@@ -27,28 +29,50 @@ export default class ExamplePage extends Component {
     this.state = {
     };
   }
+
   render() {
+    const {width, height} = Dimensions.get('window')
+
     return (
-      <ViewPagerAndroid style={styles.container}>
-        <Image source={{uri:"http://placehold.it/200"}}
-          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
-          onLoad={()=>{
-            ToastAndroid.show('onLoad',ToastAndroid.LONG)
-          }}
-        />
-        <Image source={{uri:"http://placehold.it/200"}}
-          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
-          onLoad={()=>{
-            ToastAndroid.show('onLoad',ToastAndroid.LONG)
-          }}
-        />
-        <Image source={{uri:"http://placehold.it/200"}}
-          onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
-          onLoad={()=>{
-            ToastAndroid.show('onLoad',ToastAndroid.LONG)
-          }}
-        />
-      </ViewPagerAndroid>
+      <View style={{flex:1}}>
+        <View style={{alignItems:'center', justifyContent:'center', margin: 5}}>
+          <TouchableHighlight style={{ backgroundColor:'grey', padding: 5, width:100, borderRadius:5}} onPress={Actions.Main}>
+            <Text>Main example</Text>
+          </TouchableHighlight>
+        </View>
+        <ViewPagerAndroid style={styles.container}>
+          <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+            <Image
+              source={{uri:"http://placehold.it/200"}}
+              style={{width:width, flex:1,}}
+              onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+              onLoad={()=>{
+                ToastAndroid.show('onLoad',ToastAndroid.LONG)
+              }}
+              />
+          </View>
+          <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+            <Image
+              source={{uri:"http://placehold.it/200"}}
+              style={{width:width, flex:1,}}
+              onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+              onLoad={()=>{
+                ToastAndroid.show('onLoad',ToastAndroid.LONG)
+              }}
+              />
+          </View>
+          <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+            <Image
+              source={{uri:"http://placehold.it/200"}}
+              style={{width:width, flex:1,}}
+              onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+              onLoad={()=>{
+                ToastAndroid.show('onLoad',ToastAndroid.LONG)
+              }}
+              />
+          </View>
+        </ViewPagerAndroid>
+      </View>
     );
   }
 }
