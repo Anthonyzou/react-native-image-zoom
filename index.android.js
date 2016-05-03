@@ -7,7 +7,7 @@ import React,{
 } from 'react-native';
 
 // wtf?
-var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 export default class ImageViewZoom extends Component {
   static propTypes = {
@@ -23,13 +23,11 @@ export default class ImageViewZoom extends Component {
     scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
     onTap : PropTypes.func,
     onLoad : PropTypes.func,
+    onScaleChange : PropTypes.func,
   };
 
   constructor(props) {
     super(props);
-  }
-
-  setNativeProps(nativeProps) {
   }
 
   render() {

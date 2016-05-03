@@ -21,7 +21,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.facebook.react:react-native:0.20.+'
+    compile 'com.facebook.react:react-native:+'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
 

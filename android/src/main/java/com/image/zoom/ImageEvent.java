@@ -24,12 +24,13 @@ class ImageEvent extends Event<ImageEvent> {
  */
 
 
-    @IntDef({ON_TAP, ON_LOAD})
+    @IntDef({ON_TAP, ON_LOAD, ON_SCALE})
     @Retention(RetentionPolicy.SOURCE)
     @interface ImageEventType {}
 
     public static final int ON_TAP = 1;
     public static final int ON_LOAD = 2;
+    public static final int ON_SCALE = 3;
 
     private final int mEventType;
 
@@ -44,6 +45,8 @@ class ImageEvent extends Event<ImageEvent> {
                 return "topTap";
             case ON_LOAD:
                 return "topLoad";
+            case ON_SCALE:
+                return "topScale";
             default:
                 throw new IllegalStateException("Invalid image event: " + Integer.toString(eventType));
         }

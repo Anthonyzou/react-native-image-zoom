@@ -127,6 +127,20 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             ;
         }
 
+        view.setOnScaleChangeListener(new PhotoViewAttacher.OnScaleChangeListener() {
+            @Override
+            public void onScaleChange(float scaleFactor, float focusX, float focusY) {
+                WritableMap scaleChange = Arguments.createMap();
+                scaleChange.putDouble("scaleFactor", scaleFactor);
+                scaleChange.putDouble("focusX", focusX);
+                scaleChange.putDouble("focusY", focusY);
+                mEventDispatcher.dispatchEvent(
+                        new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_SCALE)
+                        .setExtras(scaleChange)
+                );
+            }
+        });
+
         view.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {
@@ -142,7 +156,8 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
     Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
                 ImageEvent.eventNameForType(ImageEvent.ON_TAP), MapBuilder.of("registrationName", "onTap"),
-                ImageEvent.eventNameForType(ImageEvent.ON_LOAD), MapBuilder.of("registrationName", "onLoad")
+                ImageEvent.eventNameForType(ImageEvent.ON_LOAD), MapBuilder.of("registrationName", "onLoad"),
+                ImageEvent.eventNameForType(ImageEvent.ON_SCALE), MapBuilder.of("registrationName", "onScaleChange")
         );
     }
 

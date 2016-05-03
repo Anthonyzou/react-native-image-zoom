@@ -39,6 +39,9 @@ class Example extends Component {
           <Image
             onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
             style={styles.image}
+            onScaleChange={(e)=>{
+              console.log("onScaleChange", e.nativeEvent)
+            }}
             source={{uri:this.state.text}}>
           </Image>
           <Image scale={2} resizeMode={"center"}
