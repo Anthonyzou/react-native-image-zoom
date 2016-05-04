@@ -38,7 +38,7 @@ npm install --save react-native-image-zoom
 
 In `android/settings.gradle`
 ```
-include :react-native-image-zoom'
+include ':react-native-image-zoom'
 project(':react-native-image-zoom').projectDir = file('../node_modules/react-native-image-zoom/android')
 ```
 **NOTE** : If you have included other libraries in your project, the `include` line will contain the other dependencies too.
