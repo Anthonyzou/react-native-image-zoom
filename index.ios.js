@@ -1,7 +1,6 @@
-
-import React,{
+import React,{Component} from 'react';
+import {
   View,
-  Component,
   ScrollView,
   Image
 } from 'react-native';

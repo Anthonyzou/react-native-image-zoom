@@ -3,9 +3,9 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
+import React, {Component} from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   ScrollView,
@@ -18,7 +18,7 @@ import React, {
 
 import Image from 'react-native-image-zoom'
 import ViewPager from './ViewPager'
-import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
+import {Actions, Router, Scene, Schema, Animations, TabBar} from 'react-native-router-flux'
 
 class Example extends Component {
   constructor(a,b){
@@ -65,8 +65,10 @@ class main extends Component{
   render(){
     return (
       <Router hideNavBar={true}>
-        <Route name="Main" component={Example}/>
-        <Route name="ViewPager" component={ViewPager}/>
+        <Scene key="root">
+            <Scene key="Main" component={Example}/>
+            <Scene key="ViewPager" component={ViewPager}/>
+        </Scene>
       </Router>
     )
   }

@@ -22,5 +22,9 @@
   },
   "homepage": "https://github.com/Anthonyzou/react-native-image-zoom#readme",
   "dependencies": {
+  },
+  "peerDependencies": {
+    "react": "^0.14.8",
+    "react-native": "^0.25.1"
   }
 }
