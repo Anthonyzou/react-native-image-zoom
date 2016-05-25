@@ -3,15 +3,21 @@ package com.image.zoom;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.util.Base64;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView.ScaleType;
 
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -33,7 +39,9 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ViewManager extends SimpleViewManager<PhotoView> {
     private PhotoView photoView;
     private EventDispatcher mEventDispatcher;
+
     private SparseArray<Float> scales = new SparseArray<>();
+
     private ResourceDrawableIdHelper mResourceDrawableIdHelper;
 
     public ViewManager() {
@@ -52,21 +60,25 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         return photoView;
     }
 
-    @ReactProp(name = "src")
-    public void setSource(final PhotoView view, @Nullable String source) {
-        @Nullable Uri mUri = null;
-        if (source == null) return;
 
-        RequestListener listener = new RequestListener<String, GlideDrawable>() {
+
+    @ReactProp(name = "src")
+    public void setSource(final PhotoView view, ReadableMap params) {
+        @Nullable Uri mUri = null;
+        String source = params.hasKey("uri") ? params.getString("uri") : null;
+        String thumbnail = params.hasKey("thumbnail") ? params.getString("thumbnail") : null;
+        ReadableMap headers = params.hasKey("headers") ? params.getMap("headers") : null;
+
+        RequestListener listener = new RequestListener<GlideUrl, GlideDrawable>() {
             @Override
-            public boolean onException(Exception e, String model,
+            public boolean onException(Exception e, GlideUrl model,
                                        Target<GlideDrawable> target,
                                        boolean isFirstResource) {
                 return false;
             }
 
             @Override
-            public boolean onResourceReady(GlideDrawable resource, String model,
+            public boolean onResourceReady(GlideDrawable resource, GlideUrl model,
                                            Target<GlideDrawable> target,
                                            boolean isFromMemoryCache,
                                            boolean isFirstResource) {
@@ -119,12 +131,37 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             ;
         } else {
             // Handle an http address
-            Glide
+
+            // Add http headers
+            LazyHeaders.Builder lazyHeaders = new LazyHeaders.Builder();
+            Log.d("null headers", String.valueOf(headers != null));
+            if(headers != null){
+                ReadableMapKeySetIterator it = headers.keySetIterator();
+                Log.d("next headers", String.valueOf(it.hasNextKey()));
+                while(it.hasNextKey()){
+                    String Key = it.nextKey();
+
+                    lazyHeaders.addHeader(Key, headers.getString(Key));
+                }
+            }
+
+            Log.d("thing", mUri.toString());
+            DrawableRequestBuilder builder = Glide
                     .with(view.getContext())
-                    .load(mUri.toString())
+                    .load(new GlideUrl(mUri.toString(), lazyHeaders.build()))
                     .listener(listener)
-                    .into(view)
-            ;
+                    ;
+
+            //set thumbnails
+            if(thumbnail != null) {
+
+                DrawableRequestBuilder<String> thumbnailRequest = Glide
+                        .with(view.getContext())
+                        .load( thumbnail );
+                builder = builder.thumbnail(thumbnailRequest);
+            }
+
+            builder.into(view);
         }
 
         view.setOnScaleChangeListener(new PhotoViewAttacher.OnScaleChangeListener() {

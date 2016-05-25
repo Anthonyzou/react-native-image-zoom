@@ -14,6 +14,8 @@ export default class ImageViewZoom extends Component {
     source: PropTypes.oneOfType([
       PropTypes.shape({
         uri: PropTypes.string,
+        thumbnail: PropTypes.string,
+        headers: PropTypes.object,
       }),
       // Opaque type returned by require('./image.jpg')
       PropTypes.number,
@@ -33,7 +35,7 @@ export default class ImageViewZoom extends Component {
     const source = resolveAssetSource(this.props.source);
     if (source && source.uri){
 
-      const props = {...this.props, src: source.uri };
+      const props = {...this.props, src: source };
       return <ZoomImage {...props} />;
     }
     return null

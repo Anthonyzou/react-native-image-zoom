@@ -2,8 +2,8 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
-import React, {Component} from 'react';
+
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -24,7 +24,7 @@ class Example extends Component {
   constructor(a,b){
     super(a,b)
     this.state = {
-      text:'http://placehold.it/250'
+      text:'http://i.imgur.com/UZaC7fb.jpg'
     }
   }
   render() {
@@ -39,10 +39,38 @@ class Example extends Component {
           <Image
             onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
             style={styles.image}
+            source={{
+              uri: this.state.text,
+              thumbnail: "http://i.imgur.com/Yl2PB6m.jpg",
+              headers: {
+                "Referer" : 'http://...'
+              }
+            }}
+            onLoad={()=>{
+              ToastAndroid.show('delayed onLoad',ToastAndroid.LONG)
+            }}
             onScaleChange={(e)=>{
               console.log("onScaleChange", e.nativeEvent)
             }}
-            source={{uri:this.state.text}}>
+            >
+          </Image>
+          <Image
+            onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+            style={styles.image}
+            source={{
+              uri: "http://fail.com/33",
+              thumbnail: "http://i.imgur.com/Yl2PB6m.jpg",
+              headers: {
+                "Referer" : 'http://...'
+              }
+            }}
+            onLoad={()=>{
+              ToastAndroid.show('delayed onLoad',ToastAndroid.LONG)
+            }}
+            onScaleChange={(e)=>{
+              console.log("onScaleChange", e.nativeEvent)
+            }}
+            >
           </Image>
           <Image scale={2} resizeMode={"center"}
             style={styles.image}
@@ -84,4 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('example', () => main);
+AppRegistry.registerComponent('example', () => Example);

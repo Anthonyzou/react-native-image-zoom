@@ -17,7 +17,7 @@ import {
   Text,
 } from 'react-native';
 
-import {Actions, Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
+import {Actions, Router, Scene, Schema, Animations, TabBar} from 'react-native-router-flux'
 import Zoom from 'react-native-image-zoom'
 
 class Example extends Component {
@@ -42,7 +42,7 @@ class main extends Component{
   render(){
     return (
       <Router hideNavBar={true}>
-        <Route name="Main" component={Example}/>
+        <Scene Key="Main" component={Example}/>
       </Router>
     )
   }
