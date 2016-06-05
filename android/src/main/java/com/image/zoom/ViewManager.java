@@ -1,5 +1,6 @@
 package com.image.zoom;
 
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.util.Base64;
@@ -186,6 +187,24 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                 );
             }
         });
+
+        view.setOnMatrixChangeListener(new PhotoViewAttacher.OnMatrixChangedListener() {
+            @Override
+            public void onMatrixChanged(RectF rect) {
+                WritableMap rectMap = Arguments.createMap();
+                rectMap.putDouble("top", rect.top);
+                rectMap.putDouble("right", rect.right);
+                rectMap.putDouble("bottom", rect.bottom);
+                rectMap.putDouble("left", rect.left);
+                rectMap.putDouble("height", rect.height());
+                rectMap.putDouble("width", rect.width());
+                rectMap.putDouble("scale", view.getScale());
+                mEventDispatcher.dispatchEvent(
+                        new ImageEvent(view.getId(), SystemClock.uptimeMillis(), ImageEvent.ON_MATRIX)
+                        .setExtras(rectMap)
+                );
+            }
+        });
     }
 
     @Override
@@ -194,7 +213,8 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
         return MapBuilder.of(
                 ImageEvent.eventNameForType(ImageEvent.ON_TAP), MapBuilder.of("registrationName", "onTap"),
                 ImageEvent.eventNameForType(ImageEvent.ON_LOAD), MapBuilder.of("registrationName", "onLoad"),
-                ImageEvent.eventNameForType(ImageEvent.ON_SCALE), MapBuilder.of("registrationName", "onScaleChange")
+                ImageEvent.eventNameForType(ImageEvent.ON_SCALE), MapBuilder.of("registrationName", "onScaleChange"),
+                ImageEvent.eventNameForType(ImageEvent.ON_MATRIX), MapBuilder.of("registrationName", "onMatrixChange")
         );
     }
 
