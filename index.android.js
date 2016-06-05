@@ -25,6 +25,7 @@ export default class ImageViewZoom extends Component {
     onTap : PropTypes.func,
     onLoad : PropTypes.func,
     onScaleChange : PropTypes.func,
+    onMatrixChange : PropTypes.func,
   };
 
   constructor(props) {

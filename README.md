@@ -10,6 +10,8 @@
 | scaleType | string | null | one of center, centerCrop, centerInside, fitCenter, fitStart, fitEnd, fitXY, matrix|
 | onTap | function | null | optional on tap listener |
 | onLoad | function | null | optional on load listener |
+| onScaleChange | function | null | optional on scale change listener |
+| onMatrixChange | function | null | (Android only) optional on matrix change listener |
 
 ## Example
 
