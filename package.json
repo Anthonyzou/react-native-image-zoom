@@ -1,6 +1,6 @@
 {
   "name": "react-native-image-zoom",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "description": "React Native wrappers for PhotoView and universal-image-loader",
   "main": "image.js",
   "scripts": {
@@ -24,7 +24,5 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.25.1"
   }
 }
