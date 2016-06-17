@@ -111,6 +111,8 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             ;
             return;
         }
+        
+        boolean useStorageFile = false ;
 
         // handle bundled app resources
         try {
@@ -118,6 +120,9 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
             // Verify scheme is set, so that relative uri (used by static resources) are not handled.
             if (mUri.getScheme() == null) {
                 mUri = null;
+            }else if(!mUri.getScheme().equals("http") && !mUri.getScheme().equals("https")){
+                useStorageFile = true ;
+                view.setImageURI(mUri);
             }
         } catch (Exception e) {
             // ignore malformed uri, then attempt to extract resource ID.
@@ -130,7 +135,9 @@ public class ViewManager extends SimpleViewManager<PhotoView> {
                     .load(mUri)
                     .into(view)
             ;
-        } else {
+        }else if(useStorageFile){
+            Glide.with(view.getContext()).load(mUri).into(view) ;
+        }else {
             // Handle an http address
 
             // Add http headers
