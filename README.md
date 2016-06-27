@@ -1,5 +1,8 @@
 # Image pan and zoom for Android
 
+```bash
+npm install --save react-native-image-zoom
+```
 
 ##### Props:
 | Property | Type | Default | Description |
@@ -33,16 +36,45 @@ import Image from 'react-native-image-zoom'
 </Image>
 ```
 
-## Include in your App
+## Using a view pager
 
+Instead of importing from `ViewPagerAndroid` import
+`ViewPagerZoom` from `react-native-image-zoom` there is a bug
+in android view pagers with pinch and zoom.
+
+```jsx
+import {ViewPagerZoom} from 'react-native-image-zoom'
+<ViewPagerZoom style={styles.container}>
+  <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+    <Image
+      source={{uri:"http://placehold.it/200"}}
+      style={{width:width, flex:1,}}
+      onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+      onLoad={()=>{
+        ToastAndroid.show('onLoad',ToastAndroid.LONG)
+      }}
+      />
+  </View>
+  <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+    <Image
+      source={{uri:"http://placehold.it/200"}}
+      style={{width:width, flex:1,}}
+      onTap={()=>{ToastAndroid.show('ON TAP',ToastAndroid.LONG)}}
+      onLoad={()=>{
+        ToastAndroid.show('onLoad',ToastAndroid.LONG)
+      }}
+      />
+  </View>
+</ViewPagerZoom>
+```
+
+
+## Installation
 
 Installation
 ------------
 
 Install the npm package [`react-native-image-zoom`](https://www.npmjs.com/package/react-native-image-zoom). Inside your React Native project, run ([example](https://github.com/Anthonyzou/react-native-image-zoom/tree/master/example)):
-```bash
-npm install --save react-native-image-zoom
-```
 
 In `android/settings.gradle`
 ```
