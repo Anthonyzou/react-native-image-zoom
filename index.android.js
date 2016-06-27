@@ -4,9 +4,7 @@ import {
   requireNativeComponent,
   View,
 } from 'react-native';
-
-// wtf?
-const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 export default class ImageViewZoom extends Component {
   static propTypes = {

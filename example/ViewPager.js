@@ -10,7 +10,6 @@ import {
   ToastAndroid,
   ToolbarAndroid,
   InteractionManager,
-  ViewPagerAndroid,
   Dimensions,
   NativeModules,
 } from 'react-native';
@@ -18,7 +17,7 @@ import {
 import _ from 'lodash'
 import {Actions} from 'react-native-router-flux'
 import Image from 'react-native-image-zoom'
-
+import {ViewPagerZoom} from 'react-native-image-zoom'
 
 export default class ExamplePage extends Component {
   static propTypes = {};
@@ -40,7 +39,7 @@ export default class ExamplePage extends Component {
             <Text>Main example</Text>
           </TouchableHighlight>
         </View>
-        <ViewPagerAndroid style={styles.container}>
+        <ViewPagerZoom style={styles.container}>
           <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
             <Image
               source={{uri:"http://placehold.it/200"}}
@@ -71,7 +70,7 @@ export default class ExamplePage extends Component {
               }}
               />
           </View>
-        </ViewPagerAndroid>
+        </ViewPagerZoom>
       </View>
     );
   }

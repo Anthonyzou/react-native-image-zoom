@@ -8,6 +8,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.image.zoom.viewpager.ViewPager;
 
 
 import java.util.Arrays;
@@ -34,7 +35,8 @@ public class ReactImageZoom implements ReactPackage {
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
       return Arrays.<ViewManager>asList(
-          new com.image.zoom.ViewManager()
+          new com.image.zoom.ViewManager(),
+          new ViewPager()
       );
   }
 }

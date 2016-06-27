@@ -31,7 +31,7 @@ class Example extends Component {
     return (
       <ScrollView>
         <View style={{alignItems:'center', justifyContent:'center', margin: 5}}>
-          <TouchableHighlight style={{ backgroundColor:'grey', padding: 5, width:100, borderRadius:5}} onPress={Actions.ViewPager}>
+          <TouchableHighlight style={{ backgroundColor:'grey', padding: 5, width:100, borderRadius:5}} onPress={()=>Actions.ViewPager()}>
             <Text>Viewpager example</Text>
           </TouchableHighlight>
         </View>
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('example', () => Example);
+AppRegistry.registerComponent('example', () => main);
