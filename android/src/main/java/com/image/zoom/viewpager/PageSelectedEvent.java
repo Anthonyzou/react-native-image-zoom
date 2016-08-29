@@ -31,7 +31,7 @@ class PageSelectedEvent extends Event<PageSelectedEvent> {
     private final int mPosition;
 
     protected PageSelectedEvent(int viewTag, long timestampMs, int position) {
-        super(viewTag, timestampMs);
+        super(viewTag);
         mPosition = position;
     }
 
