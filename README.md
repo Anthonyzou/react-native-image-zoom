@@ -83,6 +83,22 @@ project(':react-native-image-zoom').projectDir = file('../node_modules/react-nat
 ```
 **NOTE** : If you have included other libraries in your project, the `include` line will contain the other dependencies too.
 
+In `android/build.gradle` add the jitpack repositories.
+
+```
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url "https://jitpack.io" } // <--- add this line
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+}
+```
+
 In `android/app/build.gradle`, add a dependency to `':react-native-image-zoom'`
 ```
 dependencies {
@@ -104,6 +120,7 @@ public class MainActivity extends ReactActivity {
           new ReactImageZoom() // add this manager
       );
     }
+}
 ```
 
 ---
