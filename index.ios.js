@@ -13,7 +13,8 @@ export default class ImageViewZoom extends Component {
         <ScrollView
           maximumZoomScale={this.props.maximumZoomScale}
           minimumZoomScale={this.props.minimumZoomScale}
-          contentContainerStyle={{ alignItems:'center', justifyContent:'center'}}>
+          contentContainerStyle={{ alignItems:'center', justifyContent:'center'}}
+          centerContent={true}>
           <TouchableOpacity onPress={this.props.onPress?this.props.onPress:function(){}}>
             <Image {...this.props}/>
           </TouchableOpacity>
