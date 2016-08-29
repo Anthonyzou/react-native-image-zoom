@@ -36,7 +36,7 @@ class ImageEvent extends Event<ImageEvent> {
     private final int mEventType;
 
     public ImageEvent(int viewId, long timestampMs, @ImageEventType int eventType) {
-        super(viewId, timestampMs);
+        super(viewId);
         mEventType = eventType;
     }
 
